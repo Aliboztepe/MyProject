@@ -1,0 +1,111 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sınıflar
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Sınıflar Farklı Farklı class lar oluşturularak daha okunabılır hale gelebilir.
+
+            Musteriler musteri = new Musteriler();
+            musteri.MusteriEkle("Erhan");
+            musteri.MusteriDuzenle("Ali");
+
+            Hesaplar hesap = new Hesaplar();
+            hesap.HesapEkle("Ali", 498);
+            hesap.HesapSil("Erhan", 758);
+
+            //Değer Tip ve Referans Tip Atamalarını Bir de Class üzerinde görelim.
+
+            //Değer Tip Ataması // Sadece atadığımız değer değişiyor.
+            int a = 50;
+            int b = a;
+            b = 30;
+
+
+            Console.WriteLine(a);
+            Console.WriteLine(b);
+
+            //Referans Tip Ataması  // Atadığımızda heap te tutulduğu için diğer değerde değişiyor.
+
+            Musteriler musteri1 = new Musteriler();
+            Musteriler musteri2 = musteri1;
+            musteri2.MusteriIsmi = "Erhan";
+            Console.WriteLine(musteri1.MusteriIsmi);
+            Console.WriteLine(musteri2.MusteriIsmi);
+
+
+            // STATİK Yapılar'da Yukarıdaki gibi new ile tanımlamamıza gerek kalmaz direk . ile ulaşırız.
+
+            StatikYapilar.sayi = 25;
+
+            //Direkt Statik Sınıftan Çağırdık.
+
+            StatikYapilar.StatikOlanIslemYap();
+
+            //Statik Olmayan işlemi ise  Bu şekilde yapılır.
+
+            StatikYapilar statik = new StatikYapilar();
+
+            statik.StatikOlmayanİslemYap();
+
+
+            Console.WriteLine(StatikYapilar.StatikToplama(55, 78));
+
+
+            //get set ile sayıyı alıp değiştirme vs işlemleri ÖZELLİKLER bölümünde.
+
+            Özellikler özellikler = new Özellikler();
+
+            özellikler.Sayi = 3;
+
+
+            Console.WriteLine(özellikler.Sayi);
+
+            // SABİTLER Hiç bir şekilde değiştirilemez. pi sayısı gibi. 
+            //const olan sabit statik gibi direkt çağırılır.
+            Console.WriteLine(Sabitler.pi);
+
+            //readonly ise newleriz.
+            Sabitler sabitler = new Sabitler();
+            Console.WriteLine(sabitler.Sayi);
+
+            //CONSTRUCTOR classi newlediğimizde direk çalışan metottur.Aşağıda newlediğimizde direkt olarak constructordaki metot çalıştı.
+            Constructor constructor = new Constructor(50, "Erhan");
+            // Bu metodun yaygın kullanımını da şuan yapıyoruz CONSTRUCTOR Bölümüne bakabilirsin.
+            Constructor constructor1 = new Constructor(60, "Ali");
+            constructor1.HesapEkle();
+
+            // Yapılar class gibi yazılır sadece class yerıne struct yazılır. çalışma şekilleri vs aynıdır. farkı ise class referans tipidir struct değer tipidir yani <<
+            Yapılar yapılar = new Yapılar();
+            Yapılar yapılar1 = yapılar;
+            yapılar.sayi = 3;
+            yapılar1.sayi = yapılar.sayi;
+            yapılar1.sayi = 5;
+            Console.WriteLine(yapılar.sayi);
+            Console.WriteLine(yapılar1.sayi);
+            //iki sayıda 5 oldu. referans tip olduğu için biri değişince diğeride değişir.
+
+            // Yapılarda Struct ise daha iyi performans sunar. 
+            MyStruct myStruct = new MyStruct();
+            MyStruct myStruct2 = myStruct;
+            myStruct.sayi = 4;
+            myStruct2.sayi = myStruct.sayi;
+            myStruct2.sayi = 6;
+            Console.WriteLine(myStruct.sayi);
+            Console.WriteLine(myStruct2.sayi);
+            // Sayılar 4 ve 6 oldu yani değer tip olduğu için biri değiştiğinde diğeri değişmedi.
+
+             
+
+            Console.ReadLine();
+
+
+        }
+    }
+}
